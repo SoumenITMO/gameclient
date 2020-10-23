@@ -26,7 +26,6 @@ public class HelperMethods {
     private final Logger logger = LoggerFactory.getLogger(HelperMethods.class);
 
     public LoginResponseDto login(String loginUrl, PlayerLoginDto playerLoginDto) {
-        System.out.println(loginUrl);
         try {
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders httpHeaders = new HttpHeaders();
