@@ -8,9 +8,7 @@ import com.gameclient.Services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PlayerController {
@@ -18,21 +16,21 @@ public class PlayerController {
     @Autowired
     PlayerService playerService;
 
-    @RequestMapping(value = "gamelogin", method = RequestMethod.GET)
-    public ResponseEntity gameLogin() {
+    @RequestMapping(value = "gamelogin", method = RequestMethod.POST)
+    public ResponseEntity gameLogin(@RequestBody PlayerLoginDto playerLoginDto) {
 
-        return playerService.gameLogin(new PlayerLoginDto("Mart85", "hello"));
+        return playerService.gameLogin(playerLoginDto);
     }
 
-    @RequestMapping(value = "gamelogout", method = RequestMethod.GET)
-    public String gameLogout() {
+    @RequestMapping(value = "gamelogout", method = RequestMethod.POST)
+    public String gameLogout(@RequestBody PlayerLogoutDto playerLogoutDto) {
 
-        return playerService.gameLogout(new PlayerLogoutDto("Mart85"));
+        return playerService.gameLogout(playerLogoutDto);
     }
 
-    @RequestMapping(value = "bet", method = RequestMethod.GET)
-    public ResponseEntity<BettingResponse> bet() {
+    @RequestMapping(value = "bet", method = RequestMethod.POST)
+    public ResponseEntity<BettingResponse> bet(@RequestBody BettingDto betting) {
 
-        return new ResponseEntity<>(playerService.bet(new BettingDto("Mart85", 190.45f)), HttpStatus.OK);
+        return new ResponseEntity<>(playerService.bet(betting), HttpStatus.OK);
     }
 }
